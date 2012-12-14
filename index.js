@@ -36,20 +36,21 @@ exports.unbind = function(el, type, fn, capture){
 };
 
 /**
- * trigger an event on `el`
- * 
+ * trigger an event on `el`, `options.type` is the event type
+ * defaults to "Event", `options.bubbling` defaults to `true`,
+ * `options.cancelable` defaults to `true`. More info here:
+ * http://j.mp/Uroflj
+ *
  * @param  {Element} element
- * @param  {String} event      
- * @param  {String} type       event type, defaults to 'Event'
- * @param  {Boolean} bubble     enable/disable bubbling
- * @param  {Boolean} cancelable event trigger is cancelable
+ * @param  {String} event
+ * @param  {Object} options     enable/disable bubbling
  * @api public
  */
-exports.trigger = function (el, event, type, bubble, cancelable) {
+exports.trigger = function (el, event, options) {
   var e
-    , type = type || 'Event'
-    , bubble = ('undefined' == typeof bubble) ? true : bubble
-    , cancelable = ('undefined' == typeof cancelable) ? true : cancelable;
+    , type = options.type || 'Event'
+    , bubbling = options.bubbling || true
+    , cancelable = options.cancelable || true;
 
   if (document.createEvent) {
     e = document.createEvent(type);
