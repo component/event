@@ -34,3 +34,29 @@ exports.unbind = function(el, type, fn, capture){
     el.detachEvent('on' + type, fn);
   }
 };
+
+/**
+ * trigger an event on `el`
+ * 
+ * @param  {Element} element
+ * @param  {String} event      
+ * @param  {String} type       event type, defaults to 'Event'
+ * @param  {Boolean} bubble     enable/disable bubbling
+ * @param  {Boolean} cancelable event trigger is cancelable
+ * @api public
+ */
+exports.trigger = function (el, event, type, bubble, cancelable) {
+  var e
+    , type = type || 'Event'
+    , bubble = ('undefined' == typeof bubble) ? true : bubble
+    , cancelable = ('undefined' == typeof cancelable) ? true : cancelable;
+
+  if (document.createEvent) {
+    e = document.createEvent(type);
+    e.initEvent(event, bubble, cancelable);
+    return !el.dispatchEvent(e);
+  } else {
+    e = document.createEventObject();
+    return el.fireEvent('on' + event, e);
+  }
+}

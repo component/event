@@ -4,13 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <a href="/something">link</a>
-
+    <a id="first" href="/something">link</a> |
+    <a id="second" href="/something">link 2</a>
     <script src="../build/build.js"></script>
 
     <script>
       var events = require('event');
-      var a = document.querySelector('a');
+      var a = document.querySelector('#first')
+        , b = document.querySelector('#second');
 
       function onclick(e) {
         e.preventDefault();
@@ -19,6 +20,12 @@
       }
 
       events.bind(a, 'click', onclick);
+
+      events.bind(b, 'click', function(e){
+        e.preventDefault();
+        console.log("event triggering upon #first")
+        events.trigger(a, 'click');
+      });
     </script>
   </body>
 </html>
