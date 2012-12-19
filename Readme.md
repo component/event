@@ -26,11 +26,13 @@ events.bind(a, 'click', onclick);
 
 ### .bind(el, type, callback, [capture])
 
-  Bind to `el`'s event `type` with `callback`.
+  Bind to `el`'s event `type` with `callback`,
+  returns the `callback` passed.
 
 ### .unbind(el, type, callback, [capture])
 
-  Unbind `el`'s event `type` `callback`.
+  Unbind `el`'s event `type` `callback`,
+  returns the `callback` passed.
 
 ## License
 

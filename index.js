@@ -6,6 +6,7 @@
  * @param {String} type
  * @param {Function} fn
  * @param {Boolean} capture
+ * @return {Function}
  * @api public
  */
 
@@ -15,6 +16,7 @@ exports.bind = function(el, type, fn, capture){
   } else {
     el.attachEvent('on' + type, fn);
   }
+  return fn;
 };
 
 /**
@@ -24,6 +26,7 @@ exports.bind = function(el, type, fn, capture){
  * @param {String} type
  * @param {Function} fn
  * @param {Boolean} capture
+ * @return {Function}
  * @api public
  */
 
@@ -33,4 +36,5 @@ exports.unbind = function(el, type, fn, capture){
   } else {
     el.detachEvent('on' + type, fn);
   }
+  return fn;
 };

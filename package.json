@@ -2,7 +2,7 @@
   "name": "event-component",
   "repo": "component/event",
   "description": "Event binding component",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": ["event", "events"],
   "component": {
     "scripts": {
