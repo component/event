@@ -1,24 +1,46 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Event</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    <a href="/something">link</a>
+    <a href="#something">link</a>
+    <div id="console"></div>
 
     <script src="../build/build.js"></script>
 
     <script>
       var events = require('event');
       var a = document.querySelector('a');
+      var cons = document.getElementById('console');
+      var clicked = 0
+
+      function log (text) {
+        var p = document.createElement('p');
+        p.innerHTML = text;
+        cons.appendChild(p);
+      }
 
       function onclick(e) {
-        e.preventDefault();
-        console.log(e.target);
-        events.unbind(a, 'click', onclick);
+        clicked++;
+        log(e.target.nodeName + ' clicked');
+        if (clicked == 1) {
+          e.preventDefault();
+          log('Default prevented');
+        } else {
+          e.stopPropagation();
+          log('Propagation stoped');
+          events.unbind(a, 'click', onclick);
+        }
+      }
+
+      function ondocument () {
+        log('Dispatched on document');
       }
 
       events.bind(a, 'click', onclick);
+      events.bind(document, 'click', ondocument);
     </script>
   </body>
 </html>

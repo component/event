@@ -1,4 +1,3 @@
-
 /**
  * Bind `el` event `type` to `fn`.
  *
@@ -11,11 +10,7 @@
  */
 
 exports.bind = function(el, type, fn, capture){
-  if (el.addEventListener) {
-    el.addEventListener(type, fn, capture);
-  } else {
-    el.attachEvent('on' + type, fn);
-  }
+  el.addEventListener(type, fn, capture || false);
   return fn;
 };
 
@@ -31,10 +26,33 @@ exports.bind = function(el, type, fn, capture){
  */
 
 exports.unbind = function(el, type, fn, capture){
-  if (el.removeEventListener) {
-    el.removeEventListener(type, fn, capture);
-  } else {
-    el.detachEvent('on' + type, fn);
-  }
+  el.removeEventListener(type, fn, capture || false);
   return fn;
 };
+
+if (!window.addEventListener) {
+
+  exports.bind = function(el, type, fn) {
+    fn._listener = function() {
+      var native = window.event;
+      var e = {};
+      e.native = native;
+      e.target = native.srcElement;
+      e.preventDefault = function() {
+        this.native.returnValue = false;
+      };
+      e.stopPropagation = function() {
+        this.native.cancelBubble = true;
+      };
+      return fn.call(el, e)
+    };
+    el.attachEvent('on' + type, fn._listener);
+    return fn;
+  };
+
+  exports.unbind = function(el, type, fn) {
+    if (!fn._listener) return fn;
+    el.detachEvent('on' + type, fn._listener);
+    return fn;
+  };
+}
