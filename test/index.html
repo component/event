@@ -1,24 +1,15 @@
 <html>
   <head>
-    <title>Event</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Event Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://raw.github.com/visionmedia/mocha/master/mocha.css"/>
   </head>
   <body>
-    <a href="/something">link</a>
-
+    <div id="mocha"></div>
     <script src="../build/build.js"></script>
-
-    <script>
-      var events = require('event');
-      var a = document.querySelector('a');
-
-      function onclick(e) {
-        e.preventDefault();
-        console.log(e.target);
-        events.unbind(a, 'click', onclick);
-      }
-
-      events.bind(a, 'click', onclick);
-    </script>
+    <script type src="https://raw.github.com/visionmedia/mocha/master/mocha.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="event.js"></script>
+    <script>mocha.run();</script>
   </body>
 </html>
