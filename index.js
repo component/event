@@ -70,7 +70,7 @@ Binder.unbind = function(el, type, fn, capture) {
 Binder.once = function(el, type, fn, capture) {
   var self = this;
   var one = function() {
-    Binder.unbind(el, type, fn, capture);
+    Binder.unbind(el, type, one, capture);
     fn.apply(self, arguments);
   };
   return Binder.bind(el, type, one, capture);
