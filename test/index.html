@@ -10,12 +10,21 @@
 
     <script>
       var events = require('event');
-      var a = document.querySelector('a');
+      var a = document.getElementsByTagName('a')[0];
 
       function onclick(e) {
-        e.preventDefault();
-        console.log(e.target);
+        e = e || window.e;
+
         events.unbind(a, 'click', onclick);
+
+        console.log(e);
+
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          return false;
+        }
+
       }
 
       events.bind(a, 'click', onclick);
