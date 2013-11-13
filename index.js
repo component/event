@@ -1,6 +1,6 @@
-var bind = (window.addEventListener !== undefined) ? 'addEventListener' : 'attachEvent',
-    unbind = (window.removeEventListener !== undefined) ? 'removeEventListener' : 'detachEvent',
-    prefix = (bind !== 'addEventListener') ? 'on' : '';
+var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
+    unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
+    prefix = bind !== 'addEventListener' ? 'on' : '';
 
 /**
  * Bind `el` event `type` to `fn`.
