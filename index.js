@@ -32,19 +32,23 @@ exports.unbind = function(el, type, fn, capture){
 
 if (!window.addEventListener) {
 
+  function objectCreate(proto) {
+    function F() {}
+    F.prototype = proto;
+    return new F;
+  }
+
   exports.bind = function(el, type, fn) {
-    fn._listener = function() {
-      var native = window.event;
-      var e = {};
-      e.native = native;
-      e.target = native.srcElement;
+    fn._listener = fn._listener || function() {
+      var e = objectCreate(window.event);
+      e.target = e.srcElement;
       e.preventDefault = function() {
-        this.native.returnValue = false;
+        this.returnValue = false;
       };
       e.stopPropagation = function() {
-        this.native.cancelBubble = true;
+        this.cancelBubble = true;
       };
-      return fn.call(el, e)
+      return fn.call(this, e);
     };
     el.attachEvent('on' + type, fn._listener);
     return fn;
