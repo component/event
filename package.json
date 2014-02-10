@@ -1,5 +1,5 @@
 {
-  "name": "event-component",
+  "name": "component-event",
   "repo": "component/event",
   "description": "Event binding component",
   "version": "0.1.2",
