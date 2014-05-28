@@ -1,4 +1,10 @@
 
+0.1.4 / 2014-05-27
+==================
+
+  * component, package: add "browser" as a keyword
+  * package: remove "repo" field
+
 0.1.3 / 2014-02-10
 ==================
 
