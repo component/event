@@ -3,6 +3,7 @@
   "description": "Event binding component",
   "version": "0.1.3",
   "keywords": [
+    "browser",
     "event",
     "events"
   ],
