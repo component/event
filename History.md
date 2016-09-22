@@ -1,3 +1,7 @@
+0.2.0 / 2016-09-22
+==================
+
+* [[`f1c2c3d2b1`](https://github.com/component/component-event/commit/f1c2c3d2b1)] - make requireable without `window` (Nathan Rajlich)
 
 0.1.4 / 2014-05-27
 ==================
