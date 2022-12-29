@@ -1,3 +1,9 @@
+0.2.1 / 2022-12-23
+==================
+
+* package: add `license` to `package.json`
+* add missing LICENSE file
+
 0.2.0 / 2016-09-22
 ==================
 
